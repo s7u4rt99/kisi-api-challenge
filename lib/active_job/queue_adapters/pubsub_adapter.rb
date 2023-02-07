@@ -7,7 +7,11 @@ module ActiveJob
       #
       # @param [ActiveJob::Base] job The job to be performed.
       def enqueue(job)
-        raise(NotImplementedError)
+        # client = Pubsub.new.client()
+        # convert and serialise job?
+        topic = Pubsub.new.topic("challenge")
+        # binding.pry
+        topic.publish(job.serialize.to_json)
       end
 
       # Enqueue a job to be performed at a certain time.
@@ -15,7 +19,7 @@ module ActiveJob
       # @param [ActiveJob::Base] job The job to be performed.
       # @param [Float] timestamp The time to perform the job.
       def enqueue_at(job, timestamp)
-        raise(NotImplementedError)
+        enqueue(job, timestamp: timestamp)
       end
     end
   end
