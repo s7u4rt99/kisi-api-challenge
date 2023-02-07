@@ -11,7 +11,7 @@ class Pubsub
     client.topic(name) || client.create_topic(name)
   end
 
-  private
+  # private
 
   # Create a new client.
   #
