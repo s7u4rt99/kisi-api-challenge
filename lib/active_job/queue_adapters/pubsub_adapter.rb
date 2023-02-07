@@ -7,10 +7,7 @@ module ActiveJob
       #
       # @param [ActiveJob::Base] job The job to be performed.
       def enqueue(job)
-        # client = Pubsub.new.client()
-        # convert and serialise job?
         topic = Pubsub.new.topic("challenge")
-        # binding.pry
         topic.publish(job.serialize.to_json)
       end
 
